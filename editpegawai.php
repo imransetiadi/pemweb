@@ -1,39 +1,43 @@
-<?php
-if(!isset($_SESSION)){
+<?php 
+ if(!isset($_SESSION)){
  	session_start();
  }
 include('koneksi/conn.php');
-
-$no = 1;
-$sql = "SELECT * FROM tbl_konsumen ORDER BY no_identitas DESC limit 1"; 
-$hasil=mysqli_query($conn,$sql) or die(mysqli_error());
- 
+include('template/top.php');
+include('template/navigasi.php');
+ if(!isset($_SESSION)){
+ 	session_start();
+ }
  if (empty($_SESSION['username'])) {
  	header('Location:login.php');
  }
-include('template/top.php');
-include('template/navigasi.php');
+$id=$_GET['id_pegawai'];
+
+$no=1;
+$sql = "SELECT * FROM tabel_pegawai WHERE no_pegawai='$id' "; 
+$hasil=mysqli_query($conn,$sql) or die(mysqli_error());
+while ($tampil=mysqli_fetch_array($hasil))
+{
+
 ?>
-
-
 <div id="main">
 	<div class="content">
-		<h3>Entry Konsumen</h3>
-		<form action="insertpenumpang.php" method="POST" enctype="multipart/form-data">
+		<h3>Entry Pegawai</h3>
+		<form action="updatepegawai.php" method="POST" enctype="multipart/form-data">
 			<div class="input-group">
-				<input type="text" placeholder="Nomor Indentitas Konsumen" value="<?php while($rows=mysqli_fetch_array($hasil)){ $num = $rows['no_identitas']+$no; echo $num; }?>" name="no_identitas">
+				<input type="text"  value="<?php echo $tampil['no_pegawai']; ?>" name="no_pegawai">
 			</div>
 			<div class="input-group">
-				<input type="text" placeholder="Nama Konsumen" name="nama_konsumen">
+				<input type="text"  name="nama_pegawai" value="<?php echo $tampil['nama_pegawai']; ?>">
 			</div>
 			<div class="input-group">
-				<input type="text" placeholder="Alamat Komsumen" style="width: 300px;" name="almt_konsumen">
+				<input type="text" style="width: 300px;" name="alamat_pegawai" value="<?php echo $tampil['alamat_pegawai']; ?>">
 			</div>
 			<div class="input-group">
-				<input type="text" placeholder="Nomor Telepon" name="telepon">
+				<input type="text"  name="telepon" value="<?php echo $tampil['telepon']; ?>">
 			</div>
 			<div class="input-group">
-				<input type="text" name="tmp_lahir" id="tempat" placeholder="Tempat Lahir"> /
+				<input type="text" name="tmp_lahir" id="tempat" value="<?php echo $tampil['tmp_lahir']; ?>"> /
 				<select name="tgl" id="tanggal">
 					<option value='0'>-Pilih Tanggal-</option>
 					<?php  for($tanggal=1;$tanggal<=31;$tanggal++) echo "<option value='".$tanggal."'>$tanggal</option>" ?>
@@ -48,11 +52,11 @@ include('template/navigasi.php');
 				</select>
 				<?php error_reporting(1); ?>
 				<select name="thn" id="tahun" onchange="document.getElementById('dat').value=2016-this.options[this.selectedIndex].text">
-				<option>-Pilih Tahun-<?php echo $_POST['tahun']?>
+					<option>-Pilih Tahun-<?php echo $_POST['tahun']?>
 						<?php for($t=1990;$t<2016;$t++){?> <option><?php echo $t ?></option> 
 						<?php };?>
 					</select>
-					<input type="text" name="umur" id="dat" style="width: 40px;" placeholder="Umur"> 
+					<input type="text" name="umur_pegawai" id="dat" style="width: 40px;" value="<?php echo $tampil['umur_pegawai']; ?>"> 
 				</div>
 				<div class="input-group">
 					<label for="">Foto Konsumen</label>
@@ -60,7 +64,7 @@ include('template/navigasi.php');
 				</div>
 				<div class="input-group">
 					<select name="jenis_kelamin" id="">
-					<option value="">-Pilih Jenis Kelamin-</option>
+					<option value="<?php echo $tampil['jenis_kelamin']; ?>">-Pilih Jenis Kelamin-</option>
 						<option value="Pria">Pria</option>
 						<option value="Wanita">Wanita</option>
 					</select>
@@ -71,11 +75,8 @@ include('template/navigasi.php');
 				</div>
 
 			</form>
-			<hr/>
-			<h3>Data Konsumen</h3>
-			<?php include('data/data_konsumen.php') ?>
 		</div>
 	</div>
 
 
-	<?php include('template/footer.php'); ?>
+	<?php include('template/footer.php'); } ?>

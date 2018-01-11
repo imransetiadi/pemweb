@@ -19,25 +19,27 @@ include('template/navigasi.php');
 	<tr>
 		<th style="width: 20px;">No</th>
 		<th style="width: 50px;">Foto</th>
-		<th style="width: 100px;">Nomor Indentitas</th>
-		<th style="width: 140px;">Nama Konsumen</th>
+		<th style="width: 100px;">Nomor Pegawai</th>
+		<th style="width: 140px;">Nama Pegawai</th>
 		<th>Alamat</th>
+		<th>TTL</th>
 		<th>Nomor Telepon</th>
 		<th style="width: 100px;">Jenis kelamin</th>
+		<th>Umur</th>
 	</tr>
 	<?php include('koneksi/conn.php'); 
-	$sql = "SELECT * FROM tbl_konsumen ORDER BY no_identitas ASC"; 
+	$sql = "SELECT * FROM tabel_pegawai ORDER BY no_pegawai ASC"; 
 	$hasil=mysqli_query($conn,$sql) or die(mysqli_error());
 	$no=1;
 	while ($data = mysqli_fetch_array ($hasil)){
-		$id=$data['no_identitas'];
-		$nm=$data['nama_konsumen'];
+		$id=$data['no_pegawai'];
+		$nm=$data['nama_pegawai'];
 		$jenis=$data['jenis_kelamin'];
-		$alamat=$data['almt_konsumen'];
+		$alamat=$data['alamat_pegawai'];
 		$nohp=$data['telepon'];
 		$tmpt=$data['tmp_lahir'];
 		$tgl=date('Y-m-d', strtotime($data['tgl_lahir']));
-		$umur=$data['umur'];
+		$umur=$data['umur_pegawai'];
 		$foto=$data['foto'];
 
 		?>
@@ -48,8 +50,10 @@ include('template/navigasi.php');
 			<td><?php echo $id;?></td>
 			<td><?php echo $nm; ?></td>
 			<td><?php echo $alamat; ?></td>
+			<td><?php echo "$tmpt, $tgl"; ?></td>
 			<td><?php echo $nohp; ?></td>
 			<td><?php echo $jenis; ?></td>
+			<td><?php echo $umur; ?></td>
 			
 		</tr>
 		<?php } ?>

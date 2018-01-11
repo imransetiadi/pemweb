@@ -1,11 +1,11 @@
-<?php
+<?php 
 if(!isset($_SESSION)){
  	session_start();
  }
 include('koneksi/conn.php');
 
 $no = 1;
-$sql = "SELECT * FROM tbl_konsumen ORDER BY no_identitas DESC limit 1"; 
+$sql = "SELECT * FROM tabel_pegawai ORDER BY no_pegawai DESC limit 1"; 
 $hasil=mysqli_query($conn,$sql) or die(mysqli_error());
  
  if (empty($_SESSION['username'])) {
@@ -18,16 +18,16 @@ include('template/navigasi.php');
 
 <div id="main">
 	<div class="content">
-		<h3>Entry Konsumen</h3>
-		<form action="insertpenumpang.php" method="POST" enctype="multipart/form-data">
+		<h3>Entry Pegawai</h3>
+		<form action="insertpegawai.php" method="POST" enctype="multipart/form-data">
 			<div class="input-group">
-				<input type="text" placeholder="Nomor Indentitas Konsumen" value="<?php while($rows=mysqli_fetch_array($hasil)){ $num = $rows['no_identitas']+$no; echo $num; }?>" name="no_identitas">
+				<input type="text" placeholder="Nomor Indentitas Pegawai" value="<?php while($rows=mysqli_fetch_array($hasil)){ $num = $rows['no_pegawai']+$no; echo $num; }?>" name="no_pegawai">
 			</div>
 			<div class="input-group">
-				<input type="text" placeholder="Nama Konsumen" name="nama_konsumen">
+				<input type="text" placeholder="Nama Pegawai" name="nama_pegawai">
 			</div>
 			<div class="input-group">
-				<input type="text" placeholder="Alamat Komsumen" style="width: 300px;" name="almt_konsumen">
+				<input type="text" placeholder="Alamat Pegawai" style="width: 300px;" name="alamat_pegawai">
 			</div>
 			<div class="input-group">
 				<input type="text" placeholder="Nomor Telepon" name="telepon">
@@ -48,7 +48,7 @@ include('template/navigasi.php');
 				</select>
 				<?php error_reporting(1); ?>
 				<select name="thn" id="tahun" onchange="document.getElementById('dat').value=2016-this.options[this.selectedIndex].text">
-				<option>-Pilih Tahun-<?php echo $_POST['tahun']?>
+					<option>-Pilih Tahun-<?php echo $_POST['tahun']?>
 						<?php for($t=1990;$t<2016;$t++){?> <option><?php echo $t ?></option> 
 						<?php };?>
 					</select>
@@ -60,7 +60,7 @@ include('template/navigasi.php');
 				</div>
 				<div class="input-group">
 					<select name="jenis_kelamin" id="">
-					<option value="">-Pilih Jenis Kelamin-</option>
+					<option value="0">-Pilih Jenis Kelamin-</option>
 						<option value="Pria">Pria</option>
 						<option value="Wanita">Wanita</option>
 					</select>
@@ -72,8 +72,8 @@ include('template/navigasi.php');
 
 			</form>
 			<hr/>
-			<h3>Data Konsumen</h3>
-			<?php include('data/data_konsumen.php') ?>
+			<h3>Data Pegawai</h3>
+			<?php include('data/data_pegawai.php'); ?>
 		</div>
 	</div>
 
