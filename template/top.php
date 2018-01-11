@@ -4,9 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Selamat Datang DI Website Sederhana</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="http://localhost/cibot/animate.css">
-	<link rel="stylesheet" type="text/css" href="http://localhost/cibot/font/Oxygen.css">
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" type="text/css" href="./font/Oxygen.css">
 
 	<script type="text/javascript">
 		function calculate() {
