@@ -1,9 +1,9 @@
 <?php
 date_default_timezone_set("Asia/Jakarta");
 $servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "db_tiketpesawat";
+$username = "id4181147_admin";
+$password = "admin";
+$dbname = "id4181147_db_tiketpesawat";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
