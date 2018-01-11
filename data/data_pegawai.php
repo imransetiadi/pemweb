@@ -12,7 +12,7 @@
 		<th style="width: 40px;">Edit</th>
 	</tr>
 	<?php include('koneksi/conn.php'); 
-	$sql = "SELECT * FROM tbl_pegawai ORDER BY no_pegawai ASC"; 
+	$sql = "SELECT * FROM tabel_pegawai ORDER BY no_pegawai ASC"; 
 	$hasil=mysqli_query($conn,$sql) or die(mysqli_error());
 	$no=1;
 	while ($data = mysqli_fetch_array ($hasil)){
